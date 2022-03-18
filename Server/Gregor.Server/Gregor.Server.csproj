@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -8,6 +8,13 @@
 
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Gregor.Data\Gregor.Data.csproj" />
+    <ProjectReference Include="..\Gregor.Dto\Gregor.Dto.csproj" />
+    <ProjectReference Include="..\Gregor.Enums\Gregor.Enums.csproj" />
+    <ProjectReference Include="..\Gregor.Models\Gregor.Models.csproj" />
   </ItemGroup>
 
 </Project>
