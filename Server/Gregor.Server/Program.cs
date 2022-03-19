@@ -1,4 +1,5 @@
 using Gregor.Data.Repositories;
+using Gregor.Kafka;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<IGregorRepository,GregorRepository>();
+builder.Services.AddSingleton<IKafkaService,KafkaService>();
 
 
 var app = builder.Build();

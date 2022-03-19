@@ -14,6 +14,7 @@
     <ProjectReference Include="..\Gregor.Data\Gregor.Data.csproj" />
     <ProjectReference Include="..\Gregor.Dto\Gregor.Dto.csproj" />
     <ProjectReference Include="..\Gregor.Enums\Gregor.Enums.csproj" />
+    <ProjectReference Include="..\Gregor.Kafka\Gregor.Kafka.csproj" />
     <ProjectReference Include="..\Gregor.Models\Gregor.Models.csproj" />
   </ItemGroup>
 

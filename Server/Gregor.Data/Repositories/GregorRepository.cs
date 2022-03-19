@@ -1,4 +1,6 @@
-﻿using Gregor.Dto;
+﻿using Gregor.Data.Models;
+using Gregor.Data.Statics;
+using Gregor.Dto;
 using Gregor.Dto.System;
 using Gregor.Enums;
 using LiteDB;
@@ -12,6 +14,10 @@ namespace Gregor.Data.Repositories
 {
     public class GregorRepository : IGregorRepository
     {
+
+        private string _username;
+        private string _password="string"; //TODO Auth
+
         public string getGregorPath()
         {
 
@@ -28,7 +34,12 @@ namespace Gregor.Data.Repositories
             return Path.Combine(getGregorPath(),"Gregor.db");
         }
 
-        public BaseActionResultDto initDb(string userName, string password="")
+        private LiteDatabase connectDb()
+        {
+            return new LiteDatabase($"Filename={this.getDbPath()};Password={Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(_password))}");
+        }
+
+        public BaseActionResultDto initDb(string userName, string password="", bool withData=true)
         {
 
             if (this.isDbAvailable())
@@ -39,9 +50,38 @@ namespace Gregor.Data.Repositories
             try {
                 Directory.CreateDirectory(getGregorPath());
 
-                using (var db = new LiteDatabase($"Filename={this.getDbPath()};Password={Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(password))}")) { }
+                using (var db= this.connectDb()) {
 
-                    return new BaseActionResultDto(Result.OK,"DB Created");
+
+                    var colConnections = db.GetCollection<ConnectionModel>(Collections.Connections);
+
+
+                    if (withData)
+                    {
+                        colConnections.Insert(new ConnectionModel()
+                        {
+                            name = "Test",
+                            bootstrapServers = new List<string>() { "192.168.1.2:9092"},
+                            
+                        });
+
+
+
+                    }
+
+
+                    colConnections.EnsureIndex(x => x.name);
+
+
+
+                }
+
+
+
+
+
+
+                return new BaseActionResultDto(Result.OK,"DB Created");
 
             }
             catch (Exception ex) {
@@ -56,5 +96,22 @@ namespace Gregor.Data.Repositories
         {
             return File.Exists(getDbPath());
         }
+
+
+
+        public T getSingle<T>(string coll, string id)
+        {
+
+            T? ret = default(T);
+
+            using (var db = this.connectDb())
+            {
+                ret = db.GetCollection<T>(coll).FindById(id);
+            }
+
+            return ret;
+        }
+
+
     }
 }

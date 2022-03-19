@@ -13,6 +13,9 @@ namespace Gregor.Data.Repositories
 
         public bool isDbAvailable();
         public string getDbPath();
-        public BaseActionResultDto initDb(string userName, string password);
+        public BaseActionResultDto initDb(string userName, string password, bool withData=true);
+
+
+        public T getSingle<T>(string coll, string id);
     }
 }

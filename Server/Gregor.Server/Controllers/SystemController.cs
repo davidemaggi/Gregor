@@ -48,7 +48,7 @@ namespace Gregor.Server.Controllers
         {
             try
             {
-                var ret = _gregorRepository.initDb("gregor",$"gregor{req.password}");
+                var ret = _gregorRepository.initDb("gregor",$"{req.password}");
                 return BaseResultDto<BaseActionResultDto>.fromAction(ret);
             }
             catch (Exception)
