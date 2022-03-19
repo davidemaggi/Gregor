@@ -2,6 +2,7 @@
 using Gregor.Data.Repositories;
 using Gregor.Data.Statics;
 using Gregor.Dto;
+using Gregor.Dto.Kafka;
 using Gregor.Kafka;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -34,6 +35,11 @@ namespace Gregor.Server.Controllers
 
                 var conf = this._gregorRepository.getSingle<ConnectionModel>(Collections.Connections, connectionId);
 
+                if (conf==null) {
+                    return BaseResultDto<BaseActionResultDto>.error(null, $"Error Connecting to {connectionId}: Doesn't Exist");
+
+                }
+
                 var ret = this._kafkaService.connect(conf);
 
                 
@@ -43,6 +49,32 @@ namespace Gregor.Server.Controllers
             catch (Exception ex)
             {
                 return BaseResultDto<BaseActionResultDto>.error(null, $"Error Connecting to {connectionId}: {ex.Message}");
+
+            }
+
+        }
+
+        [HttpGet("{connectionId}")]
+        [Produces(System.Net.Mime.MediaTypeNames.Application.Json)]
+        [ActionName("info")]
+        public BaseResultDto<SystemInfoDto> info(string connectionId)
+        {
+            try
+            {
+
+               
+                var ret = this._kafkaService.getConnection(connectionId)?.getServerInfo();
+
+                if (ret == null) { 
+                return BaseResultDto<SystemInfoDto>.error(null, $"Error Connecting to {connectionId}");
+
+                }
+
+                return BaseResultDto<SystemInfoDto>.success(ret);
+            }
+            catch (Exception ex)
+            {
+                return BaseResultDto<SystemInfoDto>.error(null, $"Error retrieving Info from {connectionId}: {ex.Message}");
 
             }
 

@@ -15,8 +15,15 @@ namespace Gregor.Data.Repositories
     public class GregorRepository : IGregorRepository
     {
 
-        private string _username;
-        private string _password="string"; //TODO Auth
+        private readonly string  _username;
+        private readonly string _password;
+
+        public GregorRepository(string username, string password) {
+        
+            _username = username;
+            _password = password;
+
+        }
 
         public string getGregorPath()
         {
@@ -39,7 +46,7 @@ namespace Gregor.Data.Repositories
             return new LiteDatabase($"Filename={this.getDbPath()};Password={Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(_password))}");
         }
 
-        public BaseActionResultDto initDb(string userName, string password="", bool withData=true)
+        public BaseActionResultDto initDb(bool withData=true)
         {
 
             if (this.isDbAvailable())

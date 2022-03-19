@@ -7,13 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
     <PackageReference Include="Confluent.Kafka" Version="1.8.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Gregor.Data\Gregor.Data.csproj" />
-    <ProjectReference Include="..\Gregor.Mapper\Gregor.MapService.csproj" />
-    <ProjectReference Include="..\Gregor.Tools\Gregor.Tools.csproj" />
+    <ProjectReference Include="..\Gregor.Dto\Gregor.Dto.csproj" />
   </ItemGroup>
 
 </Project>

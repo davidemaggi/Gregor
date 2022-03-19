@@ -1,5 +1,7 @@
 ﻿using Confluent.Kafka;
 using Gregor.Data.Models;
+using Gregor.Dto.Kafka;
+using Gregor.MapService;
 using Gregor.Tools;
 using System;
 using System.Collections.Generic;
@@ -16,6 +18,7 @@ namespace Gregor.Kafka.KafkaObjects
         private readonly IProducer<string,string> _producer;
         private readonly IAdminClient _adminClient;
         private readonly ConnectionModel _connectionConfig;
+        private readonly MapperService _mapper=new MapperService();
 
         public readonly string id;
 
@@ -31,13 +34,17 @@ namespace Gregor.Kafka.KafkaObjects
         }
 
 
-        public void getServerInfo()
+        public SystemInfoDto getServerInfo()
         {
-            var topics = this._adminClient.GetMetadata(TimeSpan.FromSeconds(this._connectionConfig.commandTimeout)).Topics;
+            var ret = new SystemInfoDto();
 
-            Console.WriteLine(topics.Count);
+            var metaData = this._adminClient.GetMetadata(TimeSpan.FromSeconds(this._connectionConfig.commandTimeout));
 
 
+
+
+
+            return _mapper.map(metaData,ret);
         }
 
 

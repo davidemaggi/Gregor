@@ -22,7 +22,12 @@ namespace Gregor.Kafka
 
         }
 
-        public BaseActionResultDto connect(ConnectionModel conn)
+        public KafkaConnection? getConnection(string id)=> this._connections.Find(x => x.id.Equals(id));
+
+           
+        
+
+            public BaseActionResultDto connect(ConnectionModel conn)
         {
             try
             {

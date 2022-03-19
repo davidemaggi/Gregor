@@ -8,6 +8,7 @@ namespace Gregor.Kafka
     {
 
         public BaseActionResultDto connect(ConnectionModel conn);
+        public KafkaConnection? getConnection(string id);
 
     }
 }

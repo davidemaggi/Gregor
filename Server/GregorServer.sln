@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gregor.Kafka", "Gregor.Kafk
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gregor.Tools", "Gregor.Tools\Gregor.Tools.csproj", "{1CB2DD2C-0DB0-4366-BADD-DB816FC97A4D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gregor.MapService", "Gregor.Mapper\Gregor.MapService.csproj", "{AA37784D-BB48-4D26-B6D4-2C6226965A2A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{1CB2DD2C-0DB0-4366-BADD-DB816FC97A4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CB2DD2C-0DB0-4366-BADD-DB816FC97A4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CB2DD2C-0DB0-4366-BADD-DB816FC97A4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA37784D-BB48-4D26-B6D4-2C6226965A2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA37784D-BB48-4D26-B6D4-2C6226965A2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA37784D-BB48-4D26-B6D4-2C6226965A2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA37784D-BB48-4D26-B6D4-2C6226965A2A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
