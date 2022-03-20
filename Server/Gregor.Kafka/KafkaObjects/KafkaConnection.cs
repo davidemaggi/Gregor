@@ -16,9 +16,11 @@ namespace Gregor.Kafka.KafkaObjects
 
         private readonly IConsumer<string,string> _consumer;
         private readonly IProducer<string,string> _producer;
-        private readonly IAdminClient _adminClient;
-        private readonly ConnectionModel _connectionConfig;
-        private readonly MapperService _mapper=new MapperService();
+        public readonly IAdminClient _adminClient;
+        public readonly ConnectionModel _connectionConfig;
+        private readonly MapperService _mapperService=new MapperService();
+
+        public readonly KafkaTopic Topic;
 
         public readonly string id;
 
@@ -30,7 +32,7 @@ namespace Gregor.Kafka.KafkaObjects
             this._adminClient = new AdminClientBuilder(getAdminConfig()).Build();
 
             this.id = this._connectionConfig.id;
-
+            this.Topic = new KafkaTopic(this);
         }
 
 
@@ -44,7 +46,7 @@ namespace Gregor.Kafka.KafkaObjects
 
 
 
-            return _mapper.map(metaData,ret);
+            return _mapperService._mapper.Map(metaData,ret);
         }
 
 

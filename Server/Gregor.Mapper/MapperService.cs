@@ -10,22 +10,23 @@ namespace Gregor.MapService
     public class MapperService
     {
 
-        
+       public  MapperService() {
 
-
-        public V map<T,V>(T from, V to)
-        {
-            MapperConfiguration config = new MapperConfiguration(cfg =>
+            _config = new MapperConfiguration(cfg =>
             {
-                cfg.AddProfile(new KafkaProfiles());  
+                cfg.AddProfile(new KafkaProfiles());
             });
 
-            var mapper = new Mapper(config);
-            
-            return mapper.Map<V>(from);
+            _mapper = new Mapper(_config);
+
+
 
         }
 
+        private readonly MapperConfiguration _config;
+        public readonly Mapper _mapper;
 
+
+       
     }
 }
