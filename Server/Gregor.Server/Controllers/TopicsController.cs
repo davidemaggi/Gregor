@@ -18,7 +18,7 @@ namespace Gregor.Server.Controllers
 
 
         private IGregorRepository _gregorRepository;
-        private IKafkaService _kafkaService;
+        private readonly IKafkaService _kafkaService;
 
 
 
@@ -36,6 +36,8 @@ namespace Gregor.Server.Controllers
         {
             try
             {
+
+                var tmp = new BaseResultDto<List<TopicInfoDto>>();
 
                 var ret = this._kafkaService.getConnection(connectionId)?.Topic.getAll();
 
